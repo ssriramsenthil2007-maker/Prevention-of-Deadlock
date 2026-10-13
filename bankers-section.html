@@ -1,0 +1,25 @@
+<section class="banker-section" id="bankers">
+  <div class="banker-hero"><div><div class="section-kicker">DEADLOCK AVOIDANCE / BANKER'S ALGORITHM</div><h2>Banker's Algorithm <span>Safety Lab</span></h2><p>Model maximum claims, current allocations, and total resources. Calculate Need and check whether every process can finish in a safe order.</p></div><span class="banker-chip">INTERACTIVE MODULE</span></div>
+  <div class="banker-overview">
+    <article class="banker-info"><span class="banker-info-icon">▦</span><h3>Allocation matrix</h3><p>Instances of each resource currently assigned to every process.</p></article>
+    <article class="banker-info"><span class="banker-info-icon">◎</span><h3>Maximum matrix</h3><p>The maximum number of each resource a process may need.</p></article>
+    <article class="banker-info"><span class="banker-info-icon">Δ</span><h3>Need matrix</h3><p>Remaining demand calculated automatically using <b>Need = Maximum − Allocation</b>.</p></article>
+    <article class="banker-info"><span class="banker-info-icon">↗</span><h3>Available & safe sequence</h3><p>Available is Total − allocated. A safe sequence lets every process finish in order.</p></article>
+  </div>
+  <div class="panel banker-config"><div class="panel-heading"><div><div class="section-kicker">01 / CONFIGURATION</div><h2>Define your system</h2><p class="panel-subtitle">Choose dimensions, then edit the resource matrices.</p></div><span class="icon-chip">⚙</span></div>
+    <div class="banker-config-row"><label class="banker-field">Processes <input id="bkProcessCount" type="number" min="1" max="10" value="5"></label><label class="banker-field">Resource types <input id="bkResourceCount" type="number" min="1" max="6" value="3"></label><div class="banker-actions"><button class="btn" id="bkLoadExample">↻ Load Example</button><button class="btn" id="bkReset">Reset</button></div></div>
+    <div class="banker-total-block"><div><div class="subheading">TOTAL RESOURCE INSTANCES</div><p class="panel-subtitle">All instances in the system, including allocated and available.</p></div><div id="bkTotalInputs" class="banker-total-inputs"></div></div>
+  </div>
+  <div class="banker-matrix-grid">
+    <section class="panel banker-matrix-panel"><div class="panel-heading"><div><div class="section-kicker">02 / CURRENT STATE</div><h2>Allocation matrix</h2><p class="panel-subtitle">Currently assigned instances per process.</p></div></div><div class="table-wrap banker-table-wrap" id="bkAllocationTable"></div></section>
+    <section class="panel banker-matrix-panel"><div class="panel-heading"><div><div class="section-kicker">03 / CLAIM LIMITS</div><h2>Maximum matrix</h2><p class="panel-subtitle">Maximum demand declared by each process.</p></div></div><div class="table-wrap banker-table-wrap" id="bkMaximumTable"></div></section>
+  </div>
+  <div class="panel banker-need-panel"><div class="panel-heading"><div><div class="section-kicker">04 / CALCULATED VALUES</div><h2>Need matrix & Available vector</h2><p class="panel-subtitle">Recalculated from your current inputs.</p></div><button class="btn" id="bkCalculate">Calculate Need</button></div>
+    <div class="banker-vector-row"><div class="banker-vector-card"><span>AVAILABLE VECTOR</span><div id="bkAvailableVector" class="vector-values"></div></div><div class="banker-vector-card"><span>FORMULA</span><strong class="formula">Need = Maximum − Allocation</strong><small>Available = Total resources − column-wise allocated instances</small></div></div>
+    <div class="table-wrap banker-table-wrap" id="bkNeedTable"></div><div id="bkValidation" class="banker-validation hidden" role="alert"></div>
+  </div>
+  <div class="banker-run-row"><div><div class="section-kicker">05 / SAFETY ALGORITHM</div><h2>Can every process finish?</h2><p>Run the safety check to calculate a sequence dynamically and inspect each Work-vector update.</p></div><button class="btn btn-primary" id="bkCheck">▶ Check Safe State</button></div>
+  <div class="panel banker-result-panel" id="bkResult" aria-live="polite"><div class="banker-empty-icon">◎</div><div><h3>Ready to check safety</h3><p>Load the default example or enter your own valid matrices, then run the algorithm.</p></div></div>
+  <div class="panel banker-trace-panel"><div class="panel-heading"><div><div class="section-kicker">ALGORITHM WALKTHROUGH</div><h2>Step-by-step trace</h2></div><span id="bkTraceBadge" class="result-badge">Awaiting run</span></div><div id="bkTrace" class="banker-trace-empty">The algorithm's Work and Finish updates will appear here after you check the safe state.</div></div>
+  <div class="banker-explain"><div><div class="section-kicker">HOW IT WORKS</div><h2>Why the Banker's Algorithm avoids deadlock</h2></div><p>The algorithm only approves a resource request when the resulting state remains safe. It searches for a process whose remaining Need fits within Work, then simulates that process finishing and releasing its Allocation. If all processes can finish, the state is safe; otherwise, unfinished processes are reported.</p></div>
+</section>
